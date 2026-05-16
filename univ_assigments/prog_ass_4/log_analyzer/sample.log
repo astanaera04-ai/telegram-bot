@@ -1,0 +1,4 @@
+2024-01-15 09:32:11 ERROR 192.168.1.1 - Disk quota exceeded
+2024-01-15 09:33:05 INFO 10.0.0.5 - User login successful
+2024-01-15 09:40:01 WARNING 10.0.0.9 - High CPU usage
+2024-01-15 09:45:11 ERROR 192.168.1.5 - Out of memory
