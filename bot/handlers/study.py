@@ -1,7 +1,7 @@
 from aiogram import types, F
 from aiogram import Router
-from keyboards.inline import get_subjects_menu, get_main_menu
-from services.timer_service import start_session, stop_session
+from bot.keyboards.inline import get_subjects_menu, get_main_menu
+from bot.services.timer_service import start_session, stop_session
 
 router = Router()
 
