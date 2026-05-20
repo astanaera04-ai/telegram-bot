@@ -16,7 +16,7 @@ stats.register(dp)
 settings.register(dp)
 
 async def main():
-    init_db()
+    await init_db()
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
