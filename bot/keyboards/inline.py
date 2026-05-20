@@ -1,6 +1,7 @@
+import asyncio
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram import types
-from database.db import get_connection
+from bot.database.db import get_connection
 
 
 def get_main_menu():
@@ -15,15 +16,15 @@ def get_main_menu():
 def get_subjects_menu(user_id):
     builder = InlineKeyboardBuilder()
 
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT subject_name FROM user_subjects WHERE user_id = ?", (user_id,))
-    rows = cursor.fetchall()
-    conn.close()
+    def fetch_data():
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT subject_name FROM user_subjects WHERE user_id = ?", (user_id,))
+        rows = cursor.fetchall()
+        conn.close()
+        return rows
 
-    subjects = [row[0] for row in rows] if rows else ["English", "Coding", "Math"]
-
-    for sub in subjects:
-        builder.row(types.InlineKeyboardButton(text=sub, callback_data=f"subject_{sub}"))
+    loop = asyncio.get_event_loop()
+    rows = loop.run_in_executor(None, fetch_data)
 
     return builder.as_markup()
